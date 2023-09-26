@@ -12,8 +12,11 @@ const ProductList = () => {
     if (grid_view===true) {
         return<GridViwe products={filter_products}/>;        
     }
+    console.log('filter_products', filter_products);
+    
+    
     if (grid_view===false) {
-        return<ListView products={filter_products} />;
+        return<ListView products={filter_products} />
         
     }
   

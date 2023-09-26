@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import Product from './Product';
+import FormatPrice from '../Helpers/Formatprice';
 
 
 
-const GridViwe = ({products}) => {
+
+const GridViwe = ({products,price}) => {
   return (
     <Wrapper>
       <div className='container grid grid-three-column'>
         {products.map((curElem)=>{
           return <Product key={curElem.id} {...curElem}/>;
         })}
+        <p>
+                  <FormatPrice price={price}/>
+                </p>
 
       </div>
     </Wrapper>

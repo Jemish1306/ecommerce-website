@@ -1,20 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AppProvider } from "./context/productcontext";
 import { FilterContextProvider } from "./context/FilterContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+ReactDOM.render(
 
-root.render(
+
 
     <AppProvider>
         <FilterContextProvider>
             <App/>
         </FilterContextProvider>
-    </AppProvider>
+    </AppProvider>,
+   document.getElementById("root")
 
 );
 

@@ -62,7 +62,7 @@ return (
             <p>{reviews} reviews</p>
             <p className="product-data-price">
               MRP:
-              <del>
+              <del>  
                 <FormatPrice price={price + 250000}/>
                 
               </del>

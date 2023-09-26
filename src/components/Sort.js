@@ -5,14 +5,14 @@ import { BsFillGridFill, BsList } from "react-icons/bs";
 
 const Sort = () => {
 
-  const{filter_products,grid_view,setGridview, setlistview,sorting} = useFilterContext();
+  const{filter_products,grid_view,setGridView, setlistview,sorting} = useFilterContext();
   return (
    <Wrapper>
     <div className='sort-section'>
          {/* 1st column  */}
       <div className='sorting-list--grid'>
-        <button className={grid_view?"active sort-btn" :"sort-btn"}
-        onClick={setGridview}>
+        <button className={grid_view ? "active sort-btn" :"sort-btn"}
+        onClick={setGridView}>
           <BsFillGridFill className='icon'/>
 
         </button>
@@ -59,7 +59,48 @@ const Sort = () => {
   )
 }
 
-export default Sort;
 
-const Wrapper=styled.section`
+
+const Wrapper = styled.section`
+ .sort-section{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem;
+ }
+
+  .sorting-list--grid {
+    display: flex;
+    gap: 2rem;
+
+    .sort-btn {
+      padding: 0.8rem 1rem;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .icon {
+      font-size: 1.6rem;
+    }
+    .active {
+      background-color: ${({ theme }) => theme.colors.black};
+      color: #fff;
+    }
+  }
+
+  .sort-selection .sort-selection--style {
+    padding: 0.5rem;
+    cursor: pointer;
+
+    .sort-select--option {
+      padding: 0.8rem 0;
+      cursor: pointer;
+      height: 2rem;
+      padding: 10px;
+    }
+  }
 `;
+
+export default Sort;;
