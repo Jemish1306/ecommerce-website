@@ -10,13 +10,16 @@ const FilterContext= createContext();
 
 const initialState={
     filter_products:[],
-    all_product:[],
+    all_products:[],
     grid_view:false,
     sorting_value:"lowest",
     filters:{
-        text:" ",
+        text:"",
+        category:"",
+        company:"",
     }
-}
+};
+
  export   const FilterContextProvider=({children})=>{
 
     const {products}=useProductContext();
@@ -28,7 +31,7 @@ const initialState={
     };
 
     const setlistview=()=>{
-        return dispatch({type:"SET_LIST_VIEW"})
+        return dispatch({type:"SET_LIST_VIEW"});
     };
     
    // short the products
@@ -49,11 +52,11 @@ const initialState={
 
     // update the filter values
     const updateFiltervalue=(event)=>{
-        let name =event.target.value;
+        let name =event.target.name;
         let value= event.target.value;
 
         return  dispatch ({type:"UPDATE_FILTERS_VALUE",payload :{name ,value}});
-
+ 
     };
 
     return(

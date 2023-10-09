@@ -1,8 +1,9 @@
-import { useState } from "react";
+
 
 const filterReducer = (state, action) => {
   switch (action.type) {
     case "LOAD_FILTER_PRODUCTS":
+      
       return {
         ...state,
         filter_products: [...action.payload],
@@ -103,13 +104,19 @@ const filterReducer = (state, action) => {
         let tempFilterProduct=[...all_products];
         
 
-        const {text}=state.filters;
+        const {text,category}=state.filters;
 
         if (text) {
           tempFilterProduct = tempFilterProduct.filter((curElem)=>{
            return curElem.name.toLowerCase().includes(text);
 
            
+          });
+        }
+        if (category) {
+          tempFilterProduct=tempFilterProduct.filter((curElem)=>{
+            return curElem.category===category;
+
           });
         }
 
@@ -119,9 +126,9 @@ const filterReducer = (state, action) => {
 
       return {
         ...state,
-        filter_products:tempFilterProduct,
+        filter_product:tempFilterProduct,
       }
-
+    
     default:
       return state;
   }

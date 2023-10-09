@@ -44,21 +44,20 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <AppProvider>
-        <Router>
-          <GlobalStyle />
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-
-            <Route path="/About" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/SingleProduct/:id" element={<SingleProduct />} />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="*" element={<Errorpage />}></Route>
-          </Routes>
-          <Footer />
-        </Router>
+          <Router>
+            <GlobalStyle />
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/About" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/SingleProduct/:id" element={<SingleProduct />} />
+              <Route path="/Cart" element={<Cart />} />
+              <Route path="*" element={<Errorpage />}></Route>
+            </Routes>
+            <Footer />
+          </Router>
         </AppProvider>
       </ThemeProvider>
     </>
