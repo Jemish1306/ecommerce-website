@@ -17,6 +17,7 @@ const initialState={
         text:"",
         category:"",
         company:"",
+        color:"all",
     }
 };
 
@@ -42,9 +43,9 @@ const initialState={
     };
 
     useEffect(() => {
-        dispatch({type:"FILTER_PRODUTS"});
-    dispatch({type:"SORTING_PRODUCTS"});
-    }, [products,state.sorting_value , state.filters]);
+        dispatch({type:"FILTER_PRODUTS" });
+    dispatch({type:"SORTING_PRODUCTS" });
+    }, [products,state.sorting_value , state.filters ]);
 
     useEffect(()=>{
         dispatch({type:"LOAD_FILTER_PRODUCTS",payload:products});

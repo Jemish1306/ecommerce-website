@@ -4,57 +4,92 @@ import { useFilterContext } from "../context/FilterContext";
 
 const FilterSection = () => {
   const {
-    filters: { text,category },
+    filters: { text, category },
     all_products,
     updateFiltervalue,
   } = useFilterContext();
 
   // to get unique data of each fields
-  const getUniqueData=(data,property)=>{
-    let newVAl =data.map((curElem)=>{
-      return curElem[property];
+  const getUniqueData = (data,attr) => {
+    let newVAl = data.map((curElem) => {
+      return curElem[attr];
     });
-    
-   return(newVAl=["all",...new Set(newVAl)]);          // = anathi newval ma repit category nay thay.and all pan joye 
+
+    if (attr==="color") {
+      return(newVAl=["all",...new Set([].concat(...newVAl))]);
+      
+      
+    }
+    else{
+      return (newVAl = ["all", ...new Set(newVAl)]); // = anathi newval ma repit category nay thay.and all pan joye
+
+    }
+    console.log('attr', attr)
    
-   console.log('newVAl', newVAl)
-  }
 
-
-
+    console.log("newVAl", newVAl);
+  };
 
   // we need unique data
-  const categoryOnlyData= getUniqueData(all_products, "category");
-console.log('categoryOnlyData', categoryOnlyData)
-
-
-
+  const categoryOnlyData = getUniqueData(all_products, "category");
+  const companydata = getUniqueData(all_products, "company");       // this to api mathi cetegory wize data import
+   const color =getUniqueData(all_products, "color");
+  console.log("categoryOnlyData", categoryOnlyData);
+  console.log('color', color)
 
   return (
     <Wrapper>
       <div className=" filter-search">
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type="text" name="text" onChange={updateFiltervalue} value={text}> 
-          </input>
+          <input
+            type="text"
+            name="text"
+            onChange={updateFiltervalue}
+            value={text}
+          ></input>
         </form>
       </div>
       <div className="filter-category">
         <h3>Categropy</h3>
         <div>
-          {
-            categoryOnlyData.map((curElem,index)=>{
-              return(
-                <button key={index} type="button" name="category" value={curElem} 
-                className={curElem===category ? "active":""} onClick={updateFiltervalue}>
-                  {curElem}
-
-                </button>
-              );
-
-
-            })
-          }
+          {categoryOnlyData.map((curElem, index) => {
+            return (
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={curElem}
+                className={curElem === category ? "active" : ""}
+                onClick={updateFiltervalue}
+              >
+                {curElem}
+              </button>
+            );
+          })}
+          
         </div>
+      </div>
+
+      <div className="filter-company">
+        <h3>company</h3>
+
+        <form action="#">
+          <select name="company" id="company" className="filter-company--select" onClick={updateFiltervalue}>
+            {
+              companydata.map((curElem,index)=>{
+                return(
+                  <option key={index} value={curElem} name="company" >
+                    {curElem}
+                  </option>
+                )
+
+              })
+            }
+
+          </select>
+
+        </form>
+
       </div>
     </Wrapper>
   );
@@ -72,7 +107,7 @@ const Wrapper = styled.section`
   .filter-search {
     input {
       padding: 0.6rem 1rem;
-      width:100%;
+      width: 100%;
     }
   }
   .filter-category {
