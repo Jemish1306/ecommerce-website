@@ -1,41 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../context/FilterContext";
+import { DiBintray } from "react-icons/di";
+import FormatPrice from "../Helpers/Formatprice";
+import { FaCheck } from "react-icons/fa";
+import { Button } from "../styles/Button";
 
 const FilterSection = () => {
   const {
-    filters: { text, category },
+    filters: { text, category, color, price, maxPrice, minPrice },
     all_products,
     updateFiltervalue,
+    clearFilters,
   } = useFilterContext();
 
   // to get unique data of each fields
-  const getUniqueData = (data,attr) => {
+  const getUniqueData = (data, attr) => {
     let newVAl = data.map((curElem) => {
       return curElem[attr];
     });
 
-    if (attr==="color") {
-      return(newVAl=["all",...new Set([].concat(...newVAl))]);
-      
-      
+    if (attr === "colors") {
+      // return (newVAl = ["all", ...new Set([].concat(...newVAl))]);
+      newVAl = newVAl.flat();
     }
-    else{
-      return (newVAl = ["all", ...new Set(newVAl)]); // = anathi newval ma repit category nay thay.and all pan joye
+    return (newVAl = ["all", ...new Set(newVAl)]); // = anathi newval ma repit category nay thay.and all pan joye
 
-    }
-    console.log('attr', attr)
-   
+    console.log("attr", attr);
 
     console.log("newVAl", newVAl);
   };
+  console.log("color", color);
 
   // we need unique data
   const categoryOnlyData = getUniqueData(all_products, "category");
-  const companydata = getUniqueData(all_products, "company");       // this to api mathi cetegory wize data import
-   const color =getUniqueData(all_products, "color");
+  const companydata = getUniqueData(all_products, "company"); // this to api mathi cetegory wize data import
+  const colorsdata = getUniqueData(all_products, "colors");
+
   console.log("categoryOnlyData", categoryOnlyData);
-  console.log('color', color)
+  console.log("companydata", companydata);
+  console.log("colorsdata", colorsdata);
 
   return (
     <Wrapper>
@@ -66,7 +70,8 @@ const FilterSection = () => {
               </button>
             );
           })}
-          
+
+          <DiBintray size={150} />
         </div>
       </div>
 
@@ -74,22 +79,70 @@ const FilterSection = () => {
         <h3>company</h3>
 
         <form action="#">
-          <select name="company" id="company" className="filter-company--select" onClick={updateFiltervalue}>
-            {
-              companydata.map((curElem,index)=>{
-                return(
-                  <option key={index} value={curElem} name="company" >
-                    {curElem}
-                  </option>
-                )
-
-              })
-            }
-
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFiltervalue}
+          >
+            {companydata.map((curElem, index) => {
+              return (
+                <option key={index} value={curElem} name="company">
+                  {curElem}
+                </option>
+              );
+            })}
           </select>
-
         </form>
-
+      </div>
+      <div className="filter-colors colors">
+        <h3>Colors</h3>
+        <div className="filter-color-style">
+          {colorsdata.map((curColor, index) => {
+            console.log('curColor', curColor)
+            if (curColor === "all") {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  value={curColor}
+                  name="color"
+                  className="color-all--style"
+                  onClick={updateFiltervalue}
+                >
+                  all
+                </button>
+              );
+            }
+            return (
+              <button
+                key={index}
+                type="button"
+                value={curColor}
+                name="color"
+                style={{ backgroundColor: curColor }}
+                // className="btnStyle"lassName={color === curColor ? "btnStyle active" : "btnStyle"}
+                onClick={updateFiltervalue}
+              >
+                {color === curColor ? <FaCheck className="checkStyle" /> : null}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <input
+          type="range"
+          name="price"
+          min={minPrice}
+          max={maxPrice}
+          value={price}
+          onChange={updateFiltervalue}
+        />
       </div>
     </Wrapper>
   );

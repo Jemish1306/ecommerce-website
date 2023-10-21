@@ -17,7 +17,7 @@ const initialState={
         text:"",
         category:"",
         company:"",
-        color:"all",
+        color:"",
     }
 };
 
