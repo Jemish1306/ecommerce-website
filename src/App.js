@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
@@ -46,7 +46,7 @@ const App = () => {
         <AppProvider>
           <Router>
             <GlobalStyle />
-            <Header />
+            <Header />  
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/About" element={<About />} />

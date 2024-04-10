@@ -26,11 +26,13 @@ const initialState={
     const {products}=useProductContext();
 
     const[state,dispatch]=useReducer(reducer,initialState);
+    
      // to set grid viwe
     const setGridView=()=>{
         return dispatch({type:"SET_GRID_VIEW"});
     };
 
+   
     const setlistview=()=>{
         return dispatch({type:"SET_LIST_VIEW"});
     };
