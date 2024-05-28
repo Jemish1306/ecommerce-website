@@ -19,8 +19,7 @@ const ProductList = () => {
         return<ListView products={filter_products} />
         
     }
-  
-  
+
 }
 
 export default ProductList;
